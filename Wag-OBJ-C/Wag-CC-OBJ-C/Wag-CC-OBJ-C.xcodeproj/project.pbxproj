@@ -7,14 +7,19 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		755619EF204A27510004F454 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619EE204A27510004F454 /* UserController.m */; };
 		75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF030D2048EA9A00D1AC01 /* AppDelegate.m */; };
 		75CF03142048EA9A00D1AC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03122048EA9A00D1AC01 /* Main.storyboard */; };
 		75CF03162048EA9A00D1AC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03152048EA9A00D1AC01 /* Assets.xcassets */; };
 		75CF03192048EA9A00D1AC01 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03172048EA9A00D1AC01 /* LaunchScreen.storyboard */; };
 		75CF031C2048EA9A00D1AC01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF031B2048EA9A00D1AC01 /* main.m */; };
+		75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF03232048F17F00D1AC01 /* UsersTableViewController.m */; };
+		75D691402049C8C7007FA2E3 /* UserClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6913F2049C8C7007FA2E3 /* UserClass.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		755619ED204A27510004F454 /* UserController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
+		755619EE204A27510004F454 /* UserController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		75CF03092048EA9A00D1AC01 /* Wag-CC-OBJ-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wag-CC-OBJ-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF030C2048EA9A00D1AC01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		75CF030D2048EA9A00D1AC01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -23,6 +28,10 @@
 		75CF03182048EA9A00D1AC01 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		75CF031A2048EA9A00D1AC01 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		75CF031B2048EA9A00D1AC01 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		75CF03222048F17F00D1AC01 /* UsersTableViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UsersTableViewController.h; sourceTree = "<group>"; };
+		75CF03232048F17F00D1AC01 /* UsersTableViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsersTableViewController.m; sourceTree = "<group>"; };
+		75D6913E2049C8C7007FA2E3 /* UserClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserClass.h; sourceTree = "<group>"; };
+		75D6913F2049C8C7007FA2E3 /* UserClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserClass.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +67,12 @@
 				75CF030C2048EA9A00D1AC01 /* AppDelegate.h */,
 				75CF030D2048EA9A00D1AC01 /* AppDelegate.m */,
 				75CF03122048EA9A00D1AC01 /* Main.storyboard */,
+				75CF03222048F17F00D1AC01 /* UsersTableViewController.h */,
+				75CF03232048F17F00D1AC01 /* UsersTableViewController.m */,
+				75D6913E2049C8C7007FA2E3 /* UserClass.h */,
+				75D6913F2049C8C7007FA2E3 /* UserClass.m */,
+				755619ED204A27510004F454 /* UserController.h */,
+				755619EE204A27510004F454 /* UserController.m */,
 				75CF03152048EA9A00D1AC01 /* Assets.xcassets */,
 				75CF03172048EA9A00D1AC01 /* LaunchScreen.storyboard */,
 				75CF031A2048EA9A00D1AC01 /* Info.plist */,
@@ -137,7 +152,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75D691402049C8C7007FA2E3 /* UserClass.m in Sources */,
 				75CF031C2048EA9A00D1AC01 /* main.m in Sources */,
+				755619EF204A27510004F454 /* UserController.m in Sources */,
+				75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */,
 				75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
