@@ -9,6 +9,7 @@
 #import "UsersTableViewController.h"
 #import "UserController.h"
 #import "UserClass.h"
+#import "UserCell.h"
 
 #define JSON_FILE_URL @"https://api.stackexchange.com/2.2/users?site=stackoverflow"
 
@@ -16,6 +17,8 @@
 
 @property (nonatomic) NSArray *users;
 @property (nonatomic) NSDictionary *data;
+//@property (nonatomic) UserClass *users;
+
 
 @end
 
@@ -24,15 +27,26 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
-    
-    [UserController.shared createDictionaryFromJson:URLString completion:^(NSDictionary *result, NSError *error) {
-        if (error == nil) {
-            self.users = result[@"items"];
-        }
+    [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
+        self.users = result;
         self.tableView.reloadData;
     }];
-    
 }
+    //[self.tableView registerNib:[UINib nibWithName:@"UserCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
+    
+//    UINib *cellNib = [UINib nibWithNibName:@"UserCell" bundle:nil];
+//    [self.tableView registerNib:cellNib forCellReuseIdentifier:@"usercell"];
+    
+//    [UserController.shared createDictionaryFromJson:URLString completion:^(NSDictionary *result, NSError *error) {
+//        if (error == nil) {
+//            self.users = result[@"items"];
+//            [[UserClass alloc] initWithUser:self.users[@"display_name"] avatarImageString:self.users[@"display_name"] bronzeBadgeCount:self.users[@"display_name"] silverBadgeCount:self.users[@"display_name"] goldBadgeCount:self.users[@"display_name"]];
+//            [[UserClass alloc] init initWithUser:_users[@"display_name"] avatarImageString:_users[@"profile_image"] bronzeBadgeCount:@"bagde" silverBadgeCount:@"bagde" goldBadgeCount:@"bagde"];
+        //}
+//        self.tableView.reloadData;
+//    }];
+//
+//}
 
 
 // Uncomment the following line to preserve selection between presentations.
@@ -59,14 +73,23 @@
     return self.users.count;
 }
 
-
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"userCell" forIndexPath:indexPath];
-//    [[UserClass alloc]init]
-//    initWithUser:_users["profile_name"] avatarImageString:_users["profile_name"] bronzeBadgeCount:_users["profile_name"] silverBadgeCount:_users["profile_name"] goldBadgeCount:_users["profile_name"]
+    
     //Configure the cell...
+    UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usercell" forIndexPath:indexPath];
+    UserClass *user = _users [indexPath.row];
+    cell.profileNameLabel.text = user.name;
+    cell.goldBadgeCountLabel.text = [user.goldBadgeCount stringValue];
+    cell.silverBadgeCountLabel.text = [user.silverBadgeCount stringValue];
+    cell.bronzeCountLabel.text = [user.bronzeBadgeCount stringValue];
+    // Get the images set up here.
+    
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 80;
 }
 
 

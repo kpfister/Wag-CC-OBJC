@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		755619EF204A27510004F454 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619EE204A27510004F454 /* UserController.m */; };
+		755619F5204B7C800004F454 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F4204B7C800004F454 /* UserCell.m */; };
 		75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF030D2048EA9A00D1AC01 /* AppDelegate.m */; };
 		75CF03142048EA9A00D1AC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03122048EA9A00D1AC01 /* Main.storyboard */; };
 		75CF03162048EA9A00D1AC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03152048EA9A00D1AC01 /* Assets.xcassets */; };
@@ -20,6 +21,8 @@
 /* Begin PBXFileReference section */
 		755619ED204A27510004F454 /* UserController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserController.h; sourceTree = "<group>"; };
 		755619EE204A27510004F454 /* UserController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
+		755619F3204B7C800004F454 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
+		755619F4204B7C800004F454 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		75CF03092048EA9A00D1AC01 /* Wag-CC-OBJ-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wag-CC-OBJ-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF030C2048EA9A00D1AC01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		75CF030D2048EA9A00D1AC01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -45,6 +48,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		755619F0204B7BD10004F454 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				75D6913E2049C8C7007FA2E3 /* UserClass.h */,
+				75D6913F2049C8C7007FA2E3 /* UserClass.m */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		755619F1204B7BF50004F454 /* Model Controller */ = {
+			isa = PBXGroup;
+			children = (
+				755619ED204A27510004F454 /* UserController.h */,
+				755619EE204A27510004F454 /* UserController.m */,
+			);
+			path = "Model Controller";
+			sourceTree = "<group>";
+		};
+		755619F2204B7C3C0004F454 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				75CF03222048F17F00D1AC01 /* UsersTableViewController.h */,
+				75CF03232048F17F00D1AC01 /* UsersTableViewController.m */,
+				755619F3204B7C800004F454 /* UserCell.h */,
+				755619F4204B7C800004F454 /* UserCell.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
 		75CF03002048EA9A00D1AC01 = {
 			isa = PBXGroup;
 			children = (
@@ -67,12 +99,9 @@
 				75CF030C2048EA9A00D1AC01 /* AppDelegate.h */,
 				75CF030D2048EA9A00D1AC01 /* AppDelegate.m */,
 				75CF03122048EA9A00D1AC01 /* Main.storyboard */,
-				75CF03222048F17F00D1AC01 /* UsersTableViewController.h */,
-				75CF03232048F17F00D1AC01 /* UsersTableViewController.m */,
-				75D6913E2049C8C7007FA2E3 /* UserClass.h */,
-				75D6913F2049C8C7007FA2E3 /* UserClass.m */,
-				755619ED204A27510004F454 /* UserController.h */,
-				755619EE204A27510004F454 /* UserController.m */,
+				755619F2204B7C3C0004F454 /* View Controllers */,
+				755619F0204B7BD10004F454 /* Model */,
+				755619F1204B7BF50004F454 /* Model Controller */,
 				75CF03152048EA9A00D1AC01 /* Assets.xcassets */,
 				75CF03172048EA9A00D1AC01 /* LaunchScreen.storyboard */,
 				75CF031A2048EA9A00D1AC01 /* Info.plist */,
@@ -156,6 +185,7 @@
 				75CF031C2048EA9A00D1AC01 /* main.m in Sources */,
 				755619EF204A27510004F454 /* UserController.m in Sources */,
 				75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */,
+				755619F5204B7C800004F454 /* UserCell.m in Sources */,
 				75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -10,19 +10,21 @@
 
 @implementation UserClass
 
--(instancetype)initWithUser:(NSString *)name avatarImageString:(NSString *)avatarImageString bronzeBadgeCount:(NSString *)bronzeBadgeCount silverBadgeCount:(NSString *)silverBadgeCount goldBadgeCount:(NSString *)goldBadgeCount {
+
+-(instancetype)initWithDictionary:(NSDictionary *)dict
+{
     self = [super init];
     if (self) {
-        self.name = name;
-        self.avatarImageString = avatarImageString;
-        self.bronzeBadgeCount = bronzeBadgeCount;
-        self.silverBadgeCount = silverBadgeCount;
-        self.goldBadgeCount = goldBadgeCount;
+        //[self setValuesForKeysWithDictionary:dict];
+        self.name = dict[@"display_name"];
+        self.avatarImageString = dict[@"profile_image"];
+        self.badges = dict[@"badge_counts"];
+        self.goldBadgeCount = self.badges[@"gold"];
+       self.silverBadgeCount = self.badges[@"silver"];
+        self.bronzeBadgeCount = self.badges[@"bronze"];
     }
     return self;
 }
-
-
 
  ///I want to create a convience initializer for when I am creating my users from the JSON dictionary. This, as I understand, will help me avoid any nil value issues.
 

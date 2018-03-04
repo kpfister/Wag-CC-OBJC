@@ -13,7 +13,10 @@
 
 // I want to make a singleton so I can have one instance of this class to call this method
 +(id)shared;
+
+@property NSArray *users;
+
 // I want to give this method a URL and have it complete with a dictionary -
--(void)createDictionaryFromJson: (NSString *)url completion:(void(^)(NSDictionary *result, NSError *error))completion;
-//-(void)dictionaryFromJson:(NSString *)url parameter:(NSString *)params callback:(void(^)(NSDictionary *result, NSError *error))callback;
+-(void)createArrayFromJson: (NSString *)url completion:(void(^)(NSArray *result, NSError *error))completion;
+
 @end

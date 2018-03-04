@@ -14,17 +14,15 @@
 
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, copy) NSString *avatarImageString;
-@property (nonatomic, copy) NSString *bronzeBadgeCount;
-@property (nonatomic, copy) NSString *silverBadgeCount;
-@property (nonatomic, copy) NSString *goldBadgeCount;
-
--(instancetype)initWithUser:(NSString *)name
-          avatarImageString:(NSString *)avatarImageString
-           bronzeBadgeCount:(NSString *)bronzeBadgeCount
-           silverBadgeCount:(NSString *)silverBadgeCount
-             goldBadgeCount:(NSString *)goldBadgeCount;
+@property (nonatomic, copy) NSDictionary *dict;
+@property (nonatomic, copy) NSDictionary *badges;
+@property (nonatomic, copy) NSNumber *bronzeBadgeCount;
+@property (nonatomic, copy) NSNumber *silverBadgeCount;
+@property (nonatomic, copy) NSNumber *goldBadgeCount;
 
 
+
+-(instancetype)initWithDictionary:(NSDictionary *)dict;
 
 /*
  Objectve C Method name Syntax
