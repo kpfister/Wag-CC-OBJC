@@ -1,8 +1,8 @@
 //
 //  AppDelegate.m
-//  Wag-CC-OBJ-C
+//  testing
 //
-//  Created by Karl Pfister on 3/1/18.
+//  Created by Karl Pfister on 3/4/18.
 //  Copyright © 2018 Karl Pfister. All rights reserved.
 //
 
@@ -71,7 +71,7 @@
                      * The device is out of space.
                      * The store could not be migrated to the current model version.
                      Check the error message to determine what the actual problem was.
-                     */
+                    */
                     NSLog(@"Unresolved error %@, %@", error, error.userInfo);
                     abort();
                 }
@@ -94,6 +94,5 @@
         abort();
     }
 }
-
 
 @end
