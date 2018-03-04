@@ -12,6 +12,9 @@
 #import "UserCell.h"
 #import "ImageController.h"
 #import <UIKit/UIKit.h>
+#import "User+CoreDataClass.h"
+#import "AppDelegate.h"
+@import CoreData;
 
 #define JSON_FILE_URL @"https://api.stackexchange.com/2.2/users?site=stackoverflow"
 
@@ -21,8 +24,10 @@
 @property (nonatomic) NSDictionary *data;
 @property (nonatomic) UIImage *userImage;
 
-//@property (nonatomic) UserClass *users;
-
+@property (nonatomic) NSArray <User*>* cdUSers;
+// Core data users
+@property (nonatomic) NSManagedObjectContext *context;
+@property (nonatomic, weak) AppDelegate *delegate;
 
 @end
 
@@ -30,33 +35,25 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
+    self.context = self.delegate.persistentContainer.viewContext;
+    
     NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
     [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
         self.users = result;
         self.tableView.reloadData;
     }];
-//    NSString *testingString = @"https://www.gravatar.com/avatar/6d8ebb117e8d83d74ea95fbdd0f87e13?s=128&d=identicon&r=PG";
-//    [ImageController.shared getImage:testingString completion:^(UIImage *image, NSError *error) {
-//        self.userImage = image;
-//    }];
+    [self fetchCoreDataUsers];
+    // Fetch the CD users in view will appear
+    // maybe look into didSaveNotification
+    
 }
-    //[self.tableView registerNib:[UINib nibWithName:@"UserCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
-    
-//    UINib *cellNib = [UINib nibWithNibName:@"UserCell" bundle:nil];
-//    [self.tableView registerNib:cellNib forCellReuseIdentifier:@"usercell"];
-    
-//    [UserController.shared createDictionaryFromJson:URLString completion:^(NSDictionary *result, NSError *error) {
-//        if (error == nil) {
-//            self.users = result[@"items"];
-//            [[UserClass alloc] initWithUser:self.users[@"display_name"] avatarImageString:self.users[@"display_name"] bronzeBadgeCount:self.users[@"display_name"] silverBadgeCount:self.users[@"display_name"] goldBadgeCount:self.users[@"display_name"]];
-//            [[UserClass alloc] init initWithUser:_users[@"display_name"] avatarImageString:_users[@"profile_image"] bronzeBadgeCount:@"bagde" silverBadgeCount:@"bagde" goldBadgeCount:@"bagde"];
-        //}
-//        self.tableView.reloadData;
-//    }];
-//
-//}
 
-
+-(void) fetchCoreDataUsers {
+    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    self.cdUSers = [self.context executeFetchRequest:request error:nil];
+    
+}
 // Uncomment the following line to preserve selection between presentations.
 // self.clearsSelectionOnViewWillAppear = NO;
 
