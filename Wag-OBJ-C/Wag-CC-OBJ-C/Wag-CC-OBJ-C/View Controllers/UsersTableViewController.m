@@ -10,6 +10,8 @@
 #import "UserController.h"
 #import "UserClass.h"
 #import "UserCell.h"
+#import "ImageController.h"
+#import <UIKit/UIKit.h>
 
 #define JSON_FILE_URL @"https://api.stackexchange.com/2.2/users?site=stackoverflow"
 
@@ -17,6 +19,8 @@
 
 @property (nonatomic) NSArray *users;
 @property (nonatomic) NSDictionary *data;
+@property (nonatomic) UIImage *userImage;
+
 //@property (nonatomic) UserClass *users;
 
 
@@ -31,6 +35,10 @@
         self.users = result;
         self.tableView.reloadData;
     }];
+//    NSString *testingString = @"https://www.gravatar.com/avatar/6d8ebb117e8d83d74ea95fbdd0f87e13?s=128&d=identicon&r=PG";
+//    [ImageController.shared getImage:testingString completion:^(UIImage *image, NSError *error) {
+//        self.userImage = image;
+//    }];
 }
     //[self.tableView registerNib:[UINib nibWithName:@"UserCell" bundle:nil] forCellReuseIdentifier:@"userCell"];
     
@@ -82,9 +90,16 @@
     cell.goldBadgeCountLabel.text = [user.goldBadgeCount stringValue];
     cell.silverBadgeCountLabel.text = [user.silverBadgeCount stringValue];
     cell.bronzeCountLabel.text = [user.bronzeBadgeCount stringValue];
-    // Get the images set up here.
-    
-    
+    NSString *userImageString = user.avatarImageString;
+    [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            self.userImage = image;
+            cell.avatarImage.image = self.userImage;
+        });
+        
+    }];
+  
     return cell;
 }
 

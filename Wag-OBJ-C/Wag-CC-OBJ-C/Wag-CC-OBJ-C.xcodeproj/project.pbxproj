@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		755619EF204A27510004F454 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619EE204A27510004F454 /* UserController.m */; };
 		755619F5204B7C800004F454 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F4204B7C800004F454 /* UserCell.m */; };
+		755619F8204C4D4F0004F454 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F7204C4D4F0004F454 /* ImageController.m */; };
 		75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF030D2048EA9A00D1AC01 /* AppDelegate.m */; };
 		75CF03142048EA9A00D1AC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03122048EA9A00D1AC01 /* Main.storyboard */; };
 		75CF03162048EA9A00D1AC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03152048EA9A00D1AC01 /* Assets.xcassets */; };
@@ -23,6 +24,8 @@
 		755619EE204A27510004F454 /* UserController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserController.m; sourceTree = "<group>"; };
 		755619F3204B7C800004F454 /* UserCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = UserCell.h; sourceTree = "<group>"; };
 		755619F4204B7C800004F454 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
+		755619F6204C4D4F0004F454 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
+		755619F7204C4D4F0004F454 /* ImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
 		75CF03092048EA9A00D1AC01 /* Wag-CC-OBJ-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wag-CC-OBJ-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF030C2048EA9A00D1AC01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		75CF030D2048EA9A00D1AC01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -62,6 +65,8 @@
 			children = (
 				755619ED204A27510004F454 /* UserController.h */,
 				755619EE204A27510004F454 /* UserController.m */,
+				755619F6204C4D4F0004F454 /* ImageController.h */,
+				755619F7204C4D4F0004F454 /* ImageController.m */,
 			);
 			path = "Model Controller";
 			sourceTree = "<group>";
@@ -183,6 +188,7 @@
 			files = (
 				75D691402049C8C7007FA2E3 /* UserClass.m in Sources */,
 				75CF031C2048EA9A00D1AC01 /* main.m in Sources */,
+				755619F8204C4D4F0004F454 /* ImageController.m in Sources */,
 				755619EF204A27510004F454 /* UserController.m in Sources */,
 				75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */,
 				755619F5204B7C800004F454 /* UserCell.m in Sources */,
