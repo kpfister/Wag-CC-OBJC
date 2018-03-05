@@ -100,18 +100,16 @@
     cell.bronzeCountLabel.text = user.bronzeBadgeCount;
     
     NSString *userImageString = user.avatarImageString;
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-    [activityIndicator setCenter:cell.imageView.center];
-    [activityIndicator startAnimating];
-    [cell.contentView addSubview:activityIndicator];
-    
-    [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
 
+    [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
+        cell.activityIndicator.hidden = false;
+        [[cell activityIndicator]startAnimating];
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             self.userImage = image;
             cell.avatarImage.image = self.userImage;
-//            [activityIndicator.stopAnimating];
-//            [activityIndicator removeFromSuperview];
+            cell.activityIndicator.hidden = true;
+            [[cell activityIndicator] stopAnimating];
         });
     }];
     return cell;

@@ -100,13 +100,6 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
-		758FF34F204CF1330056D35D /* CoreData Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = "CoreData Models";
-			sourceTree = "<group>";
-		};
 		75CF03002048EA9A00D1AC01 = {
 			isa = PBXGroup;
 			children = (
@@ -114,7 +107,6 @@
 				758FF349204CE7BA0056D35D /* User+CoreDataClass.h */,
 				758FF34A204CE7BA0056D35D /* User+CoreDataClass.m */,
 				758FF34B204CE7BA0056D35D /* User+CoreDataProperties.m */,
-				758FF34F204CF1330056D35D /* CoreData Models */,
 				75CF030B2048EA9A00D1AC01 /* Wag-CC-OBJ-C */,
 				75CF030A2048EA9A00D1AC01 /* Products */,
 				75170B55204C950500ADCFEE /* Frameworks */,
