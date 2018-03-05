@@ -37,10 +37,7 @@
 
     // Configure the view for the selected state
 }
--(void)designAvatarImageView{
-    _avatarImage.layer.cornerRadius = 8;
-    _avatarImage.layer.masksToBounds = true;
-}
+
 -(void)designBadgeViews; {
     // Lets make these bad boys a cirle!
     _goldBageView.layer.cornerRadius = _goldBageView.layer.bounds.size.width / 2;

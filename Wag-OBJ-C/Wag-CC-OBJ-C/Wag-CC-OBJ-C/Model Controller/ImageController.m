@@ -30,7 +30,6 @@
         if (error == nil) {
             // If there is no Error - Check if there is data
             if (data != nil) {
-                //UIImage *image = UIIma
                 UIImage *image = [UIImage imageWithData:data];
                 dispatch_async(dispatch_get_main_queue(), ^{
                     completion(image, nil);

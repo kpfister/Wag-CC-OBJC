@@ -25,7 +25,7 @@
 @property (nonatomic) NSDictionary *data;
 @property (nonatomic) UIImage *userImage;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
-@property (nonatomic) NSArray <User*>* cdUsers;
+@property (nonatomic) NSArray <User*>* users;
 // Core data users
 //@property (nonatomic) NSManagedObjectContext *context;
 //@property (nonatomic, weak) AppDelegate *delegate;
@@ -38,23 +38,22 @@
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadData" object:nil];
- 
-    [[self fetchedResultsController] performFetch:nil];
-    self.cdUsers = [[self fetchedResultsController]fetchedObjects];
-    if (self.cdUsers.count == 0) {
     
+    [[self fetchedResultsController] performFetch:nil];
+    self.users = [[self fetchedResultsController]fetchedObjects];
+    if (self.users.count == 0) {
+        
         NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
         [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
-            //self.users = result;
-            self.cdUsers = result;
+            self.users = result;
             [self.tableView reloadData];
-           
+            
         }];
         // maybe look into didSaveNotification
         [self.tableView reloadData];
         [self.tableView layoutIfNeeded];
     }
-    //[self fetchCoreDataUsers];
+    
     [self.tableView reloadData];
     [self.tableView layoutIfNeeded];
 }
@@ -64,7 +63,7 @@
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-
+    
     AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
     
@@ -89,12 +88,6 @@
     return fetchRequest;
 }
 
-// Uncomment the following line to preserve selection between presentations.
-// self.clearsSelectionOnViewWillAppear = NO;
-
-// Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-// self.navigationItem.rightBarButtonItem = self.editButtonItem;
-//]}
 - (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
     [self.tableView beginUpdates];
 }
@@ -117,7 +110,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
     
-    return self.cdUsers.count;
+    return self.users.count;
 };
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,25 +118,39 @@
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usercell" forIndexPath:indexPath];
     User *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
-        cell.profileNameLabel.text = user.name;
-        cell.goldBadgeCountLabel.text = user.goldBadgeCount;
-        cell.silverBadgeCountLabel.text = user.silverBadgeCount;
-        cell.bronzeCountLabel.text = user.bronzeBadgeCount;
-    
+    cell.profileNameLabel.text = user.name;
+    cell.goldBadgeCountLabel.text = user.goldBadgeCount;
+    cell.silverBadgeCountLabel.text = user.silverBadgeCount;
+    cell.bronzeCountLabel.text = user.bronzeBadgeCount;
+    // IF the user does not have a avatar image - make one from the string
+    if (user.avatarImage == nil) {
         NSString *userImageString = user.avatarImageString;
-    
         [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
             cell.activityIndicator.hidden = false;
             [[cell activityIndicator]startAnimating];
-    
+            // All UI changes on the main_queue
             dispatch_async(dispatch_get_main_queue(), ^{
                 self.userImage = image;
                 cell.avatarImage.image = self.userImage;
+                // Create data from this image
+                NSData *imageData = UIImagePNGRepresentation(image);
+                user.avatarImage = imageData;
                 cell.activityIndicator.hidden = true;
                 [[cell activityIndicator] stopAnimating];
             });
         }];
-  
+    } else {
+        // Use the imageData from our Persistance Store to create an image
+        cell.activityIndicator.hidden = false;
+        [[cell activityIndicator]startAnimating];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            UIImage *image = [UIImage imageWithData:user.avatarImage];
+            cell.avatarImage.image = image;
+            cell.activityIndicator.hidden = true;
+            [[cell activityIndicator]stopAnimating];
+        });
+    }
+
     return cell;
     
 }
@@ -152,53 +159,5 @@
     return 80;
     
 }
-
-//-(void)saveToCoreData {
-//    self.users;
-//}
-
-/*
- // Override to support conditional editing of the table view.
- - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the specified item to be editable.
- return YES;
- }
- */
-
-/*
- // Override to support editing the table view.
- - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
- if (editingStyle == UITableViewCellEditingStyleDelete) {
- // Delete the row from the data source
- [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
- } else if (editingStyle == UITableViewCellEditingStyleInsert) {
- // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
- }
- }
- */
-
-/*
- // Override to support rearranging the table view.
- - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
- }
- */
-
-/*
- // Override to support conditional rearranging of the table view.
- - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
- // Return NO if you do not want the item to be re-orderable.
- return YES;
- }
- */
-
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
 @end

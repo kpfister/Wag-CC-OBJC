@@ -24,6 +24,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *bronzeCountLabel;
 
 -(void)designBadgeViews;
--(void)designAvatarImageView;
+
 // Add some nice UI touches
 @end

@@ -71,6 +71,7 @@
     }];
     [dataTask resume];
 }
+
 // create a method that wil save my users to CD
 -(void)saveUsersToCoreData: (NSArray*) users; {
     for (UserClass *classUser in users) {
@@ -79,9 +80,7 @@
         NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
         
         NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-        //NSData *imageData = UIImagePNGRepresentation(image);
         
-        //[user setValue:classUser.avatarImage forKey:@"avatarImage"];
         [user setValue:classUser.name forKey:@"name"];
         [user setValue:classUser.avatarImageString forKey:@"avatarImageString"];
         [user setValue:classUser.goldBadgeCount forKey:@"goldBadgeCount"];

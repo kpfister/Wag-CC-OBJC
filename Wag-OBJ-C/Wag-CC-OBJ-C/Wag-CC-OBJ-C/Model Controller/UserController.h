@@ -20,7 +20,7 @@
 
 @property NSArray *users;
 
-// I want to give this method a URL and have it complete with a dictionary -
+// I want to give this method a URL and have it complete with an array-
 -(void)createArrayFromJson: (NSString *)url completion:(void(^)(NSArray *result, NSError *error))completion;
 
 @end
