@@ -11,8 +11,6 @@
 		755619EF204A27510004F454 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619EE204A27510004F454 /* UserController.m */; };
 		755619F5204B7C800004F454 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F4204B7C800004F454 /* UserCell.m */; };
 		755619F8204C4D4F0004F454 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F7204C4D4F0004F454 /* ImageController.m */; };
-		758FF34C204CE7BA0056D35D /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 758FF34A204CE7BA0056D35D /* User+CoreDataClass.m */; };
-		758FF34D204CE7BA0056D35D /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 758FF34B204CE7BA0056D35D /* User+CoreDataProperties.m */; };
 		75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF030D2048EA9A00D1AC01 /* AppDelegate.m */; };
 		75CF03142048EA9A00D1AC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03122048EA9A00D1AC01 /* Main.storyboard */; };
 		75CF03162048EA9A00D1AC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03152048EA9A00D1AC01 /* Assets.xcassets */; };
@@ -20,6 +18,7 @@
 		75CF031C2048EA9A00D1AC01 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF031B2048EA9A00D1AC01 /* main.m */; };
 		75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF03232048F17F00D1AC01 /* UsersTableViewController.m */; };
 		75D691402049C8C7007FA2E3 /* UserClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 75D6913F2049C8C7007FA2E3 /* UserClass.m */; };
+		75E43C8A204D0E4600788FD7 /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75170B61204C97B800ADCFEE /* User.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -210,13 +209,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				758FF34D204CE7BA0056D35D /* User+CoreDataProperties.m in Sources */,
+				75E43C8A204D0E4600788FD7 /* User.xcdatamodeld in Sources */,
 				75D691402049C8C7007FA2E3 /* UserClass.m in Sources */,
 				75CF031C2048EA9A00D1AC01 /* main.m in Sources */,
 				755619F8204C4D4F0004F454 /* ImageController.m in Sources */,
 				755619EF204A27510004F454 /* UserController.m in Sources */,
 				75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */,
-				758FF34C204CE7BA0056D35D /* User+CoreDataClass.m in Sources */,
 				755619F5204B7C800004F454 /* UserCell.m in Sources */,
 				75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */,
 			);
