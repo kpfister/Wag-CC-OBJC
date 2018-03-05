@@ -1,3 +1,4 @@
+
 //
 //  UsersTableViewController.m
 //  Wag-CC-OBJ-C
@@ -20,10 +21,10 @@
 
 @interface UsersTableViewController ()
 
-@property (nonatomic) NSArray *users;
+//@property (nonatomic) NSArray *users;
 @property (nonatomic) NSDictionary *data;
 @property (nonatomic) UIImage *userImage;
-
+@property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSArray <User*>* cdUsers;
 // Core data users
 //@property (nonatomic) NSManagedObjectContext *context;
@@ -35,41 +36,72 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-        //self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
-    //self.delegate = [AppDelegate sharedAppDelegate];
-    
-    [self fetchCoreDataUsers];
-    
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadData" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadData" object:nil];
+ 
+    [[self fetchedResultsController] performFetch:nil];
+    self.cdUsers = [[self fetchedResultsController]fetchedObjects];
     if (self.cdUsers.count == 0) {
     
         NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
         [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
-            self.users = result;
-            //[[self tableView]reloadData];
+            //self.users = result;
+            self.cdUsers = result;
+            [self.tableView reloadData];
+           
         }];
         // maybe look into didSaveNotification
-        //[self fetchCoreDataUsers];
-     //self.tableView.reloadData;
+        [self.tableView reloadData];
+        [self.tableView layoutIfNeeded];
     }
+    //[self fetchCoreDataUsers];
+    [self.tableView reloadData];
+    [self.tableView layoutIfNeeded];
 }
-//-(void)viewWillAppear:(BOOL)animated {
-//    [[self tableView]reloadData];
-//}
 
--(void) fetchCoreDataUsers {
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    self.cdUsers = [context executeFetchRequest:request error:nil];
+- (void)reloadTable:(NSNotification *)notification {
     [self.tableView reloadData];
 }
+
+- (NSFetchedResultsController *)fetchedResultsController {
+
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
+    
+    if (!_fetchedResultsController) {
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:context sectionNameKeyPath:nil cacheName:@"USER_Cache"];
+        [NSFetchedResultsController deleteCacheWithName:@"USER_Cache"];
+        NSError *error = nil;
+        if (![self.fetchedResultsController performFetch:&error]) {
+            NSLog(@"Error: %@ %@", error.localizedDescription, error.userInfo);
+        }
+        [self.tableView reloadData];
+    }
+    _fetchedResultsController.delegate = self;
+    return _fetchedResultsController;
+}
+- (NSFetchRequest *)fetchRequest {
+    
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"name" ascending:true];
+    [fetchRequest setSortDescriptors:@[sortDescriptor]];
+    
+    return fetchRequest;
+}
+
 // Uncomment the following line to preserve selection between presentations.
 // self.clearsSelectionOnViewWillAppear = NO;
 
 // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
 // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 //]}
+- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView beginUpdates];
+}
 
+- (void)controllerDidChangeContent:(NSFetchedResultsController *)controller {
+    [self.tableView endUpdates];
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -84,39 +116,41 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
+    
     return self.cdUsers.count;
-}
+};
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    //Configure the cell...
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usercell" forIndexPath:indexPath];
-        User *user = _cdUsers [indexPath.row];
+    User *user = [self.fetchedResultsController objectAtIndexPath:indexPath];
     
+        cell.profileNameLabel.text = user.name;
+        cell.goldBadgeCountLabel.text = user.goldBadgeCount;
+        cell.silverBadgeCountLabel.text = user.silverBadgeCount;
+        cell.bronzeCountLabel.text = user.bronzeBadgeCount;
     
-    cell.profileNameLabel.text = user.name;
-    cell.goldBadgeCountLabel.text = user.goldBadgeCount;
-    cell.silverBadgeCountLabel.text = user.silverBadgeCount;
-    cell.bronzeCountLabel.text = user.bronzeBadgeCount;
+        NSString *userImageString = user.avatarImageString;
     
-    NSString *userImageString = user.avatarImageString;
-
-    [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
-        cell.activityIndicator.hidden = false;
-        [[cell activityIndicator]startAnimating];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            self.userImage = image;
-            cell.avatarImage.image = self.userImage;
-            cell.activityIndicator.hidden = true;
-            [[cell activityIndicator] stopAnimating];
-        });
-    }];
+        [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
+            cell.activityIndicator.hidden = false;
+            [[cell activityIndicator]startAnimating];
+    
+            dispatch_async(dispatch_get_main_queue(), ^{
+                self.userImage = image;
+                cell.avatarImage.image = self.userImage;
+                cell.activityIndicator.hidden = true;
+                [[cell activityIndicator] stopAnimating];
+            });
+        }];
+  
     return cell;
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 80;
+    
 }
 
 //-(void)saveToCoreData {

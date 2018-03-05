@@ -27,6 +27,7 @@
         self.silverBadgeCount = [self.badges[@"silver"]stringValue];
         self.bronzeBadgeCount = [self.badges[@"bronze"]stringValue];
         
+        
     }
     return self;
 }

@@ -52,14 +52,12 @@
                         UserClass *users = [[UserClass alloc] initWithDictionary:dict];
                         [items addObject:users];
                     }
-                
                     self.users = [items copy];
                     // complete on the main queue
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        
-                        completion(self.users,nil);
                         [self saveUsersToCoreData:self.users];
-                        
+                        completion(self.users,nil);
+                        [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
                     });
                 }
                 else {
@@ -81,12 +79,15 @@
         NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
         
         NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
+        //NSData *imageData = UIImagePNGRepresentation(image);
+        
+        //[user setValue:classUser.avatarImage forKey:@"avatarImage"];
         [user setValue:classUser.name forKey:@"name"];
         [user setValue:classUser.avatarImageString forKey:@"avatarImageString"];
         [user setValue:classUser.goldBadgeCount forKey:@"goldBadgeCount"];
         [user setValue:classUser.silverBadgeCount forKey:@"silverBadgeCount"];
         [user setValue:classUser.bronzeBadgeCount forKey:@"bronzeBadgeCount"];
-        delegate.saveContext;
+        [delegate saveContext];
     }
 }
 @end
