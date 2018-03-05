@@ -63,12 +63,12 @@
 
 -(void) createData {
     // Mock data
-    User *user1 = [[User alloc] initWithContext:self.context];
-    user1.name = @"Fred";
-    user1.bronzeBadgeCount = 12;
-    user1.silverBadgeCount = 12;
-    user1.goldBadgeCount = 12;
-    [self saveContext];
+//    User *user1 = [[User alloc] initWithContext:self.context];
+//    user1.name = @"Fred";
+//    user1.bronzeBadgeCount = 12;
+//    user1.silverBadgeCount = 12;
+//    user1.goldBadgeCount = 12;
+    //[self saveContext];
 }
 -(void) basicFetch {
     // Mock

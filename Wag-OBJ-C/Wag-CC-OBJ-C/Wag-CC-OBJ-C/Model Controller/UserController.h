@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "UserClass.h"
+#import "User+CoreDataClass.h"
+#import "AppDelegate.h"
+@import CoreData;
+
 
 @interface UserController : NSObject
 
@@ -15,6 +19,9 @@
 +(id)shared;
 
 @property NSArray *users;
+// Core data users
+@property (nonatomic) NSManagedObjectContext *context;
+@property (nonatomic, weak) AppDelegate *delegate;
 
 // I want to give this method a URL and have it complete with a dictionary -
 -(void)createArrayFromJson: (NSString *)url completion:(void(^)(NSArray *result, NSError *error))completion;

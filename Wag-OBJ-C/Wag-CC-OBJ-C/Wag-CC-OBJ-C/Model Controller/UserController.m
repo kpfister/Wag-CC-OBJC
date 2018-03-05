@@ -8,6 +8,10 @@
 
 #import "UserController.h"
 #import "UserClass.h"
+#import "User+CoreDataClass.h"
+#import "AppDelegate.h"
+@import CoreData;
+
 
 @implementation UserController
 +(id)shared {
@@ -30,7 +34,7 @@
     
     NSURLSession *session = [NSURLSession sharedSession];
     
-    NSURLSessionDataTask* dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+    NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // If there is no error
         if (error == nil) {
             //Check if there is data
@@ -47,6 +51,10 @@
                     for (NSDictionary *dict in itemsFromDictionary) {
                         UserClass *users = [[UserClass alloc] initWithDictionary:dict];
                         [items addObject:users];
+                        // save the user to CD
+                        //dispatch_async(dispatch_get_main_queue(), ^{
+                            [self saveUsersToCoreData:items];
+                        //});
                     }
                 
                     self.users = [items copy];
@@ -54,6 +62,7 @@
                     dispatch_async(dispatch_get_main_queue(), ^{
                         
                         completion(self.users,nil);
+                        
                     });
                 }
                 else {
@@ -67,5 +76,23 @@
     }];
     [dataTask resume];
 }
-
+// create a method that wil save my users to CD
+-(void)saveUsersToCoreData: (NSArray*) users; {
+    for (UserClass *classUser in users) {
+    
+        self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
+        self.context = self.delegate.persistentContainer.viewContext;
+        
+        NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:_context];
+        [user setValue:classUser.name forKey:@"name"];
+        [user setValue:classUser.avatarImageString forKey:@"avatarImageString"];
+        [user setValue:classUser.goldBadgeCount forKey:@"goldBadgeCount"];
+        [user setValue:classUser.silverBadgeCount forKey:@"silverBadgeCount"];
+        [user setValue:classUser.bronzeBadgeCount forKey:@"bronzeBadgeCount"];
+        _delegate.saveContext;
+    
+    }
+}
 @end
+
+

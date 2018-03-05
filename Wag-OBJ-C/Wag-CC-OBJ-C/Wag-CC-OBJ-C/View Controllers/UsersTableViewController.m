@@ -37,17 +37,21 @@
     [super viewDidLoad];
     self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
     self.context = self.delegate.persistentContainer.viewContext;
-    
-    NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
-    [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
-        self.users = result;
-        self.tableView.reloadData;
-    }];
     [self fetchCoreDataUsers];
-    // Fetch the CD users in view will appear
-    // maybe look into didSaveNotification
     
-}
+    if (self.cdUSers.count == 0) {
+    
+        NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
+        [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
+            self.users = result;
+            
+        }];
+        // maybe look into didSaveNotification
+        [self fetchCoreDataUsers];
+     self.tableView.reloadData;
+    }
+    self.tableView.reloadData;
+    }
 
 -(void) fetchCoreDataUsers {
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
@@ -75,28 +79,29 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return self.users.count;
+    return self.cdUSers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Configure the cell...
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usercell" forIndexPath:indexPath];
-    UserClass *user = _users [indexPath.row];
+        User *user = _cdUSers [indexPath.row];
+    
+    
     cell.profileNameLabel.text = user.name;
-    cell.goldBadgeCountLabel.text = [user.goldBadgeCount stringValue];
-    cell.silverBadgeCountLabel.text = [user.silverBadgeCount stringValue];
-    cell.bronzeCountLabel.text = [user.bronzeBadgeCount stringValue];
+//    cell.goldBadgeCountLabel.text = [user.goldBadgeCount stringValue];
+//    cell.silverBadgeCountLabel.text = [user.silverBadgeCount stringValue];
+//    cell.bronzeCountLabel.text = [user.bronzeBadgeCount stringValue];
     NSString *userImageString = user.avatarImageString;
     [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
-        
+
         dispatch_async(dispatch_get_main_queue(), ^{
             self.userImage = image;
             cell.avatarImage.image = self.userImage;
         });
-        
+
     }];
-  
     return cell;
 }
 
@@ -104,6 +109,9 @@
     return 80;
 }
 
+-(void)saveToCoreData {
+    self.users;
+}
 
 /*
  // Override to support conditional editing of the table view.

@@ -15,4 +15,5 @@
 @property (weak, nonatomic) IBOutlet UILabel *silverBadgeCountLabel;
 @property (weak, nonatomic) IBOutlet UILabel *bronzeCountLabel;
 
+
 @end

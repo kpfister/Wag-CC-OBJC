@@ -20,6 +20,10 @@
 @property (nonatomic, copy) NSNumber *silverBadgeCount;
 @property (nonatomic, copy) NSNumber *goldBadgeCount;
 
+// Core data users
+//@property (nonatomic) NSManagedObjectContext *context;
+//@property (nonatomic, weak) AppDelegate *delegate;
+
 
 
 -(instancetype)initWithDictionary:(NSDictionary *)dict;

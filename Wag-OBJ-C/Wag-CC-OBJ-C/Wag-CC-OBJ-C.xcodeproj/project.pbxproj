@@ -30,6 +30,10 @@
 		755619F4204B7C800004F454 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		755619F6204C4D4F0004F454 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
 		755619F7204C4D4F0004F454 /* ImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
+		758FF336204CBA9F0056D35D /* User+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		758FF337204CBA9F0056D35D /* User+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataClass.h"; sourceTree = "<group>"; };
+		758FF338204CBA9F0056D35D /* User+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataClass.m"; sourceTree = "<group>"; };
+		758FF339204CBA9F0056D35D /* User+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		75CF03092048EA9A00D1AC01 /* Wag-CC-OBJ-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wag-CC-OBJ-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF030C2048EA9A00D1AC01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		75CF030D2048EA9A00D1AC01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -98,6 +102,10 @@
 		75CF03002048EA9A00D1AC01 = {
 			isa = PBXGroup;
 			children = (
+				758FF336204CBA9F0056D35D /* User+CoreDataProperties.h */,
+				758FF337204CBA9F0056D35D /* User+CoreDataClass.h */,
+				758FF338204CBA9F0056D35D /* User+CoreDataClass.m */,
+				758FF339204CBA9F0056D35D /* User+CoreDataProperties.m */,
 				75CF030B2048EA9A00D1AC01 /* Wag-CC-OBJ-C */,
 				75CF030A2048EA9A00D1AC01 /* Products */,
 				75170B55204C950500ADCFEE /* Frameworks */,
