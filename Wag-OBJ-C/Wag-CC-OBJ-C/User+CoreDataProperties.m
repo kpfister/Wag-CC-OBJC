@@ -17,9 +17,7 @@
 
 @dynamic avatarImage;
 @dynamic avatarImageString;
-@dynamic badges;
 @dynamic bronzeBadgeCount;
-@dynamic dict;
 @dynamic goldBadgeCount;
 @dynamic name;
 @dynamic silverBadgeCount;

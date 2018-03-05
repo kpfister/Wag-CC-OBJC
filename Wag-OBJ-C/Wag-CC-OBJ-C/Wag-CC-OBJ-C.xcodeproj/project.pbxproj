@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		75170B57204C950500ADCFEE /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 75170B56204C950500ADCFEE /* CoreData.framework */; };
-		75170B63204C97B800ADCFEE /* User.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 75170B61204C97B800ADCFEE /* User.xcdatamodeld */; };
 		755619EF204A27510004F454 /* UserController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619EE204A27510004F454 /* UserController.m */; };
 		755619F5204B7C800004F454 /* UserCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F4204B7C800004F454 /* UserCell.m */; };
 		755619F8204C4D4F0004F454 /* ImageController.m in Sources */ = {isa = PBXBuildFile; fileRef = 755619F7204C4D4F0004F454 /* ImageController.m */; };
+		758FF34C204CE7BA0056D35D /* User+CoreDataClass.m in Sources */ = {isa = PBXBuildFile; fileRef = 758FF34A204CE7BA0056D35D /* User+CoreDataClass.m */; };
+		758FF34D204CE7BA0056D35D /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = 758FF34B204CE7BA0056D35D /* User+CoreDataProperties.m */; };
 		75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 75CF030D2048EA9A00D1AC01 /* AppDelegate.m */; };
 		75CF03142048EA9A00D1AC01 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03122048EA9A00D1AC01 /* Main.storyboard */; };
 		75CF03162048EA9A00D1AC01 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 75CF03152048EA9A00D1AC01 /* Assets.xcassets */; };
@@ -30,10 +31,10 @@
 		755619F4204B7C800004F454 /* UserCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UserCell.m; sourceTree = "<group>"; };
 		755619F6204C4D4F0004F454 /* ImageController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ImageController.h; sourceTree = "<group>"; };
 		755619F7204C4D4F0004F454 /* ImageController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ImageController.m; sourceTree = "<group>"; };
-		758FF336204CBA9F0056D35D /* User+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
-		758FF337204CBA9F0056D35D /* User+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataClass.h"; sourceTree = "<group>"; };
-		758FF338204CBA9F0056D35D /* User+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataClass.m"; sourceTree = "<group>"; };
-		758FF339204CBA9F0056D35D /* User+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		758FF348204CE7BA0056D35D /* User+CoreDataProperties.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		758FF349204CE7BA0056D35D /* User+CoreDataClass.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataClass.h"; sourceTree = "<group>"; };
+		758FF34A204CE7BA0056D35D /* User+CoreDataClass.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataClass.m"; sourceTree = "<group>"; };
+		758FF34B204CE7BA0056D35D /* User+CoreDataProperties.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		75CF03092048EA9A00D1AC01 /* Wag-CC-OBJ-C.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Wag-CC-OBJ-C.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		75CF030C2048EA9A00D1AC01 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		75CF030D2048EA9A00D1AC01 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -99,13 +100,21 @@
 			path = "View Controllers";
 			sourceTree = "<group>";
 		};
+		758FF34F204CF1330056D35D /* CoreData Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "CoreData Models";
+			sourceTree = "<group>";
+		};
 		75CF03002048EA9A00D1AC01 = {
 			isa = PBXGroup;
 			children = (
-				758FF336204CBA9F0056D35D /* User+CoreDataProperties.h */,
-				758FF337204CBA9F0056D35D /* User+CoreDataClass.h */,
-				758FF338204CBA9F0056D35D /* User+CoreDataClass.m */,
-				758FF339204CBA9F0056D35D /* User+CoreDataProperties.m */,
+				758FF348204CE7BA0056D35D /* User+CoreDataProperties.h */,
+				758FF349204CE7BA0056D35D /* User+CoreDataClass.h */,
+				758FF34A204CE7BA0056D35D /* User+CoreDataClass.m */,
+				758FF34B204CE7BA0056D35D /* User+CoreDataProperties.m */,
+				758FF34F204CF1330056D35D /* CoreData Models */,
 				75CF030B2048EA9A00D1AC01 /* Wag-CC-OBJ-C */,
 				75CF030A2048EA9A00D1AC01 /* Products */,
 				75170B55204C950500ADCFEE /* Frameworks */,
@@ -209,12 +218,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				75170B63204C97B800ADCFEE /* User.xcdatamodeld in Sources */,
+				758FF34D204CE7BA0056D35D /* User+CoreDataProperties.m in Sources */,
 				75D691402049C8C7007FA2E3 /* UserClass.m in Sources */,
 				75CF031C2048EA9A00D1AC01 /* main.m in Sources */,
 				755619F8204C4D4F0004F454 /* ImageController.m in Sources */,
 				755619EF204A27510004F454 /* UserController.m in Sources */,
 				75CF03242048F17F00D1AC01 /* UsersTableViewController.m in Sources */,
+				758FF34C204CE7BA0056D35D /* User+CoreDataClass.m in Sources */,
 				755619F5204B7C800004F454 /* UserCell.m in Sources */,
 				75CF030E2048EA9A00D1AC01 /* AppDelegate.m in Sources */,
 			);

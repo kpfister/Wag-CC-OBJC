@@ -18,12 +18,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSData *avatarImage;
 @property (nullable, nonatomic, copy) NSString *avatarImageString;
-@property (nullable, nonatomic, retain) NSData *badges;
-@property (nonatomic) int32_t bronzeBadgeCount;
-@property (nullable, nonatomic, retain) NSData *dict;
-@property (nonatomic) int32_t goldBadgeCount;
+@property (nullable, nonatomic, copy) NSString *bronzeBadgeCount;
+@property (nullable, nonatomic, copy) NSString *goldBadgeCount;
 @property (nullable, nonatomic, copy) NSString *name;
-@property (nonatomic) int32_t silverBadgeCount;
+@property (nullable, nonatomic, copy) NSString *silverBadgeCount;
 
 @end
 

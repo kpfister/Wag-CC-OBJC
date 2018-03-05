@@ -10,7 +10,7 @@
 #import <UIKit/UIKit.h>
 
 @interface ImageController : NSObject
-//-(void)createArrayFromJson: (NSString *)url completion:(void(^)(NSArray *result, NSError *error))completion;
+
 @property UIImage *image;
 
 +(id)shared;

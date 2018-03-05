@@ -24,10 +24,10 @@
 @property (nonatomic) NSDictionary *data;
 @property (nonatomic) UIImage *userImage;
 
-@property (nonatomic) NSArray <User*>* cdUSers;
+@property (nonatomic) NSArray <User*>* cdUsers;
 // Core data users
-@property (nonatomic) NSManagedObjectContext *context;
-@property (nonatomic, weak) AppDelegate *delegate;
+//@property (nonatomic) NSManagedObjectContext *context;
+//@property (nonatomic, weak) AppDelegate *delegate;
 
 @end
 
@@ -35,28 +35,33 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
-    self.context = self.delegate.persistentContainer.viewContext;
+        //self.delegate = (AppDelegate *) [[UIApplication sharedApplication]delegate];
+    //self.delegate = [AppDelegate sharedAppDelegate];
+    
     [self fetchCoreDataUsers];
     
-    if (self.cdUSers.count == 0) {
+    if (self.cdUsers.count == 0) {
     
         NSString *URLString = @"https://api.stackexchange.com/2.2/users?site=stackoverflow";
         [UserController.shared createArrayFromJson:URLString completion:^(NSArray *result, NSError *error) {
             self.users = result;
-            
+            //[[self tableView]reloadData];
         }];
         // maybe look into didSaveNotification
-        [self fetchCoreDataUsers];
-     self.tableView.reloadData;
+        //[self fetchCoreDataUsers];
+     //self.tableView.reloadData;
     }
-    self.tableView.reloadData;
-    }
+}
+//-(void)viewWillAppear:(BOOL)animated {
+//    [[self tableView]reloadData];
+//}
 
 -(void) fetchCoreDataUsers {
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
     NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-    self.cdUSers = [self.context executeFetchRequest:request error:nil];
-    
+    self.cdUsers = [context executeFetchRequest:request error:nil];
+    [self.tableView reloadData];
 }
 // Uncomment the following line to preserve selection between presentations.
 // self.clearsSelectionOnViewWillAppear = NO;
@@ -79,28 +84,35 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 #warning Incomplete implementation, return the number of rows
-    return self.cdUSers.count;
+    return self.cdUsers.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     //Configure the cell...
     UserCell *cell = [tableView dequeueReusableCellWithIdentifier:@"usercell" forIndexPath:indexPath];
-        User *user = _cdUSers [indexPath.row];
+        User *user = _cdUsers [indexPath.row];
     
     
     cell.profileNameLabel.text = user.name;
-//    cell.goldBadgeCountLabel.text = [user.goldBadgeCount stringValue];
-//    cell.silverBadgeCountLabel.text = [user.silverBadgeCount stringValue];
-//    cell.bronzeCountLabel.text = [user.bronzeBadgeCount stringValue];
+    cell.goldBadgeCountLabel.text = user.goldBadgeCount;
+    cell.silverBadgeCountLabel.text = user.silverBadgeCount;
+    cell.bronzeCountLabel.text = user.bronzeBadgeCount;
+    
     NSString *userImageString = user.avatarImageString;
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    [activityIndicator setCenter:cell.imageView.center];
+    [activityIndicator startAnimating];
+    [cell.contentView addSubview:activityIndicator];
+    
     [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
 
         dispatch_async(dispatch_get_main_queue(), ^{
             self.userImage = image;
             cell.avatarImage.image = self.userImage;
+//            [activityIndicator.stopAnimating];
+//            [activityIndicator removeFromSuperview];
         });
-
     }];
     return cell;
 }
@@ -109,9 +121,9 @@
     return 80;
 }
 
--(void)saveToCoreData {
-    self.users;
-}
+//-(void)saveToCoreData {
+//    self.users;
+//}
 
 /*
  // Override to support conditional editing of the table view.

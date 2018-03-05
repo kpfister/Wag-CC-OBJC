@@ -16,15 +16,9 @@
 @property (nonatomic, copy) NSString *avatarImageString;
 @property (nonatomic, copy) NSDictionary *dict;
 @property (nonatomic, copy) NSDictionary *badges;
-@property (nonatomic, copy) NSNumber *bronzeBadgeCount;
-@property (nonatomic, copy) NSNumber *silverBadgeCount;
-@property (nonatomic, copy) NSNumber *goldBadgeCount;
-
-// Core data users
-//@property (nonatomic) NSManagedObjectContext *context;
-//@property (nonatomic, weak) AppDelegate *delegate;
-
-
+@property (nonatomic, copy) NSString *bronzeBadgeCount;
+@property (nonatomic, copy) NSString *silverBadgeCount;
+@property (nonatomic, copy) NSString *goldBadgeCount;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dict;
 

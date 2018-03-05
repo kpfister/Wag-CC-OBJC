@@ -11,19 +11,4 @@
 
 @implementation User
 
--(instancetype)initWithDictionary:(NSDictionary *)dict
-{
-    self = [super init];
-    if (self) {
-        //[self setValuesForKeysWithDictionary:dict];
-        self.name = dict[@"display_name"];
-        self.avatarImageString = dict[@"profile_image"];
-        self.badges = dict[@"badge_counts"];
-        self.goldBadgeCount = self.badges[@"gold"];
-        self.silverBadgeCount = self.badges[@"silver"];
-        self.bronzeBadgeCount = self.badges[@"bronze"];
-        
-    }
-    return self;
-}
 @end

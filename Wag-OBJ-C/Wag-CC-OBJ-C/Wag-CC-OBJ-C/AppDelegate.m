@@ -18,12 +18,11 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.context = self.persistentContainer.viewContext;
     //[self createData];
-    [self basicFetch];
+    //[self basicFetch];
     return YES;
 }
 
@@ -60,34 +59,31 @@
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
+///Mock Data to test my Coredata
 
--(void) createData {
-    // Mock data
-//    User *user1 = [[User alloc] initWithContext:self.context];
-//    user1.name = @"Fred";
-//    user1.bronzeBadgeCount = 12;
-//    user1.silverBadgeCount = 12;
-//    user1.goldBadgeCount = 12;
-    //[self saveContext];
-}
--(void) basicFetch {
-    // Mock
-    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
-
-    NSArray <User*>* users = [self.context executeFetchRequest:request error:nil];
-    [self printResultsFromArray:users];
-    
-}
-// Testing
--(void)printResultsFromArray: (NSArray <User*>*) users {
-    for (User *user in users) {
-        NSLog(@"%@ has bronze coins", user.name);
-    }
-}
-//-(void) (NSArray *) executeFetchRequest: (NSFetchRequest *) request error: (NSError *_Nullable*)error {
+//-(void) createData {
+//     Mock data
+//        User *user1 = [[User alloc] initWithContext:self.context];
+//        user1.name = @"Fred";
+//        user1.bronzeBadgeCount = 12;
+//        user1.silverBadgeCount = 12;
+//        user1.goldBadgeCount = 12;
+//    [self saveContext];
+//}
+//-(void) basicFetch {
+//    // Mock
+//    NSFetchRequest *request = [NSFetchRequest fetchRequestWithEntityName:@"User"];
+//
+//    NSArray <User*>* users = [self.context executeFetchRequest:request error:nil];
+//    [self printResultsFromArray:users];
 //
 //}
-
+//// Testing
+//-(void)printResultsFromArray: (NSArray <User*>*) users {
+//    for (User *user in users) {
+//        NSLog(@"%@ has bronze coins", user.name);
+//    }
+//}
 
 - (NSPersistentContainer *)persistentContainer {
     // The persistent container for the application. This implementation creates and returns a container, having loaded the store for the application to it.
@@ -110,8 +106,7 @@
 #pragma mark - Core Data Saving support
 
 - (void)saveContext {
-    //NSManagedObjectContext *context = self.persistentContainer.viewContext;
-
+   
     NSError *error = nil;
     if ([self.context hasChanges] && ![self.context save:&error]) {
         // Replace this implementation with code to handle the error appropriately.
