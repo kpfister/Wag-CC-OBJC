@@ -112,7 +112,7 @@
         [[cell activityIndicator]startAnimating];
         // Readability
         NSString *userImageString = user.avatarImageString;
-        [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
+        [ImageController getImage:userImageString completion:^(UIImage *image, NSError *error) {
             // Complets with an image
             /// All UI changes on the main_queue
             dispatch_async(dispatch_get_main_queue(), ^{

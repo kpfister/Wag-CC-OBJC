@@ -12,9 +12,7 @@
 @interface ImageController : NSObject
 
 @property UIImage *image;
-
-+(id)shared;
-
--(void)getImage: (NSString *)url completion: (void(^)(UIImage *image, NSError *error))completion;
+// Take a url string and complete with an image
++(ImageController *)getImage: (NSString *)url completion: (void(^)(UIImage *image, NSError *error))completion;
 
 @end

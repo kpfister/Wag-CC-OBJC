@@ -21,8 +21,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     self.context = self.persistentContainer.viewContext;
-    //[self createData];
-    //[self basicFetch];
+    
     return YES;
 }
 
@@ -52,14 +51,15 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+    /// I dont need to save the context here as Im saving the users when they are created.
+    //[self saveContext];
 }
 
 
 #pragma mark - Core Data stack
 
 @synthesize persistentContainer = _persistentContainer;
-///Mock Data to test my Coredata
+# pragma marl - Mock Data to test my Coredata
 
 //-(void) createData {
 //     Mock data

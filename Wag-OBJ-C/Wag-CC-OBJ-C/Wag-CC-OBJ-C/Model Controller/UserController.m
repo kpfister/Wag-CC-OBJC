@@ -12,12 +12,10 @@
 #import "AppDelegate.h"
 @import CoreData;
 
-
 @implementation UserController
 +(id)shared {
     static UserController *sharedInstance = nil;
     static dispatch_once_t onceToken;
-    // Static becuase the scope of these I only want to access here
     
     dispatch_once(&onceToken, ^{
         sharedInstance = [[self alloc] init];
@@ -27,23 +25,24 @@
 }
 
 -(void)createArrayFromJson: (NSString *)url completion:(void(^)(NSArray *result, NSError *error))completion; {
+    // First, create out URL from the string passed into this method
     NSMutableURLRequest *urlRequest = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url]];
-    
-    //create the Method "GET"
+    // Create the Method "GET"
     [urlRequest setHTTPMethod:@"GET"];
-    
+    // Create the Session
     NSURLSession *session = [NSURLSession sharedSession];
-    
+    // Set the dataTask with the url created from the url strong
     NSURLSessionDataTask *dataTask = [session dataTaskWithRequest:urlRequest completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         // If there is no error
         if (error == nil) {
             //Check if there is data
             if (data != nil) {
+                // If there is data check if there is an error
                 NSError *readError;
                 NSDictionary *jsonArray = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&readError];
                 if (readError == nil) {
+                    // If no error then we have our dectionary and can parse thru it
                     NSMutableArray *itemsFromDictionary = jsonArray[@"items"];
-                    
                     // Create custom objects from JSON array
                     // I want to access the jsonArray["Itmes"]
                     // and map thru that array and create a user object from each item in the array
@@ -76,17 +75,19 @@
 // create a method that wil save my users to CD
 -(void)saveUsersToCoreData: (NSArray*) users; {
     for (UserClass *classUser in users) {
-        
+        // loop through each user in the array
         AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
         NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
-        
+        // get our context and insert a new object for the User Entity
         NSManagedObject *user = [NSEntityDescription insertNewObjectForEntityForName:@"User" inManagedObjectContext:context];
-        
+        // Set the values
         [user setValue:classUser.name forKey:@"name"];
         [user setValue:classUser.avatarImageString forKey:@"avatarImageString"];
         [user setValue:classUser.goldBadgeCount forKey:@"goldBadgeCount"];
         [user setValue:classUser.silverBadgeCount forKey:@"silverBadgeCount"];
         [user setValue:classUser.bronzeBadgeCount forKey:@"bronzeBadgeCount"];
+        // Will save the Image from the cell when its created
+        // Save the users
         [delegate saveContext];
     }
 }
