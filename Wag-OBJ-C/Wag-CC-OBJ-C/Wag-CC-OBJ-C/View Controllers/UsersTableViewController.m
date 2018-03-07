@@ -26,6 +26,8 @@
 @property (nonatomic) UIImage *userImage;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 @property (nonatomic) NSArray <User*>* users;
+@property (nonatomic) NSManagedObjectContext *moc;
+@property (nonatomic) AppDelegate *delegate;
 // Core data users
 //@property (nonatomic) NSManagedObjectContext *context;
 //@property (nonatomic, weak) AppDelegate *delegate;
@@ -35,6 +37,9 @@
 @implementation UsersTableViewController
 
 - (void)viewDidLoad {
+   _delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    _moc = _delegate.persistentContainer.viewContext;
+    
     [super viewDidLoad];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:@"reloadData" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(reloadTable:) name:@"reloadData" object:nil];
@@ -63,12 +68,9 @@
 }
 
 - (NSFetchedResultsController *)fetchedResultsController {
-    
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    NSManagedObjectContext *context = delegate.persistentContainer.viewContext;
-    
+
     if (!_fetchedResultsController) {
-        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:context sectionNameKeyPath:nil cacheName:@"USER_Cache"];
+        _fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:[self fetchRequest] managedObjectContext:[self moc] sectionNameKeyPath:nil cacheName:@"USER_Cache"];
         [NSFetchedResultsController deleteCacheWithName:@"USER_Cache"];
         NSError *error = nil;
         if (![self.fetchedResultsController performFetch:&error]) {
@@ -103,12 +105,10 @@
 #pragma mark - Table view data source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-#warning Incomplete implementation, return the number of sections
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of rows
     
     return self.users.count;
 };
@@ -124,9 +124,11 @@
     cell.bronzeCountLabel.text = user.bronzeBadgeCount;
     // IF the user does not have a avatar image - make one from the string
     if (user.avatarImage == nil) {
+        // Start the activity Indicator
+        cell.activityIndicator.hidden = false;
+        
         NSString *userImageString = user.avatarImageString;
         [ImageController.shared getImage:userImageString completion:^(UIImage *image, NSError *error) {
-            cell.activityIndicator.hidden = false;
             [[cell activityIndicator]startAnimating];
             // All UI changes on the main_queue
             dispatch_async(dispatch_get_main_queue(), ^{
@@ -135,6 +137,7 @@
                 // Create data from this image
                 NSData *imageData = UIImagePNGRepresentation(image);
                 user.avatarImage = imageData;
+                [_delegate saveContext];
                 cell.activityIndicator.hidden = true;
                 [[cell activityIndicator] stopAnimating];
             });

@@ -55,6 +55,7 @@
                     self.users = [items copy];
                     // complete on the main queue
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        // Save the users 
                         [self saveUsersToCoreData:self.users];
                         completion(self.users,nil);
                         [[NSNotificationCenter defaultCenter] postNotificationName:@"reloadData" object:self];
