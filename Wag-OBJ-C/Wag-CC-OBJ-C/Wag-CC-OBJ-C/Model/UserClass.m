@@ -26,6 +26,7 @@
         self.goldBadgeCount = [self.badges[@"gold"]stringValue];
         self.silverBadgeCount = [self.badges[@"silver"]stringValue];
         self.bronzeBadgeCount = [self.badges[@"bronze"]stringValue];
+        //self.avatarImage = [self.avatarImage];
         
         
     }

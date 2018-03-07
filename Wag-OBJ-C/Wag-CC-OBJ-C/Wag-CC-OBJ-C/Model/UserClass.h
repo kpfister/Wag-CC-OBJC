@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-//#import <UIKit/UIKit.h>
+#import <UIKit/UIKit.h>
 
 @interface UserClass : NSObject
 
@@ -20,7 +20,7 @@
 @property (nonatomic, copy) NSString *bronzeBadgeCount;
 @property (nonatomic, copy) NSString *silverBadgeCount;
 @property (nonatomic, copy) NSString *goldBadgeCount;
-//@property (nonatomic, copy) UIImage *avatarImage;
+@property (nonatomic, copy) UIImage *avatarImage;
 
 -(instancetype)initWithDictionary:(NSDictionary *)dict;
 
