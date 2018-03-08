@@ -13,5 +13,6 @@ Thank you!
 Cheers :D 
 Karl Pfister
 
+** Master Branch is the original submission - the branch cleanUpCodeAndImprovements Is much cleaner code and fixes some bugs I missed in my origal submission. ** 
 
 
